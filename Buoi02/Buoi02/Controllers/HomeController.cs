@@ -6,6 +6,8 @@ namespace Buoi02.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("/")] // Định tuyến cho trang chủ
+        [Route("/hello-world")]
         public IActionResult Index()
         {
             return View();
@@ -13,6 +15,7 @@ namespace Buoi02.Controllers
 
         // GET: /Home/Hello
         // GET: /Home/Hello?name=Ronaldo
+        [Route("/hello/{name}")] // Định tuyến cho phương thức Hello
         public IActionResult Hello(string name = "David")
         {
             return Content($"Hello {name}");
@@ -42,6 +45,18 @@ namespace Buoi02.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult ActionIndex()
+        {
+            ViewBag.Message = "Hello from ActionIndex!";
+            return View("MyView");
+        }
+
+        public IActionResult MyView()
+        {
+            ViewBag.Message = "Hello from MyView!";
+            return View();
         }
     }
 }
